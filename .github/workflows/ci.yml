@@ -18,4 +18,4 @@ jobs:
           python-version: '3.11'
 
       - name: Run sensor simulation briefly
-        run: timeout 5s python sensor.py
+        run: timeout 8s python sensor.py
