@@ -19,6 +19,7 @@ jobs:
 
       - name: Run sensor simulation briefly
         run: |
+          set +e
           timeout 8s python sensor.py
           code=$?
           if [ $code -eq 0 ] || [ $code -eq 124 ]; then
