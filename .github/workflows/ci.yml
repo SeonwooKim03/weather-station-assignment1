@@ -17,13 +17,20 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run sensor simulation briefly
+      - name: Run sensor simulation
+        run: timeout 8s python sensor.py
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
         run: |
-          set +e
-          timeout 8s python sensor.py
-          code=$?
-          if [ $code -eq 0 ] || [ $code -eq 124 ]; then
-            exit 0
-          else
-            exit $code
-          fi
+          cd sampler
+          npm install
+
+      - name: Run unit tests
+        run: |
+          cd sampler
+          npm test
